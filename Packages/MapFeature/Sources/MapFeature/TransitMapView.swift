@@ -34,6 +34,10 @@ public struct TransitMapView: View {
         transitService.vehicles.filter { filterState.isVisible($0) }
     }
 
+    private var shouldCluster: Bool {
+        visibleSpan > 0.03
+    }
+
     public var body: some View {
         ZStack(alignment: .bottomTrailing) {
             Map(position: $cameraPosition) {
@@ -44,19 +48,50 @@ public struct TransitMapView: View {
                         .stroke(.blue, lineWidth: 4)
                 }
 
-                // Vehicle annotations
-                ForEach(filteredVehicles) { vehicle in
-                    Annotation(
-                        vehicle.destination.localized,
-                        coordinate: vehicle.coords.clLocationCoordinate,
-                        anchor: .center,
-                    ) {
-                        VehicleAnnotationView(
-                            vehicle: vehicle,
-                            line: transitService.line(for: vehicle.lineId),
-                        )
-                        .onTapGesture {
-                            selectedVehicle = vehicle
+                // Vehicle annotations (clustered at low zoom)
+                if shouldCluster {
+                    ForEach(VehicleClusterer.cluster(filteredVehicles)) { cluster in
+                        if cluster.count == 1, let vehicle = cluster.vehicles.first {
+                            Annotation(
+                                vehicle.destination.localized,
+                                coordinate: cluster.center.clLocationCoordinate,
+                                anchor: .center,
+                            ) {
+                                VehicleAnnotationView(
+                                    vehicle: vehicle,
+                                    line: transitService.line(for: vehicle.lineId),
+                                )
+                                .onTapGesture { selectedVehicle = vehicle }
+                            }
+                        } else {
+                            Annotation(
+                                "\(cluster.count) buses",
+                                coordinate: cluster.center.clLocationCoordinate,
+                                anchor: .center,
+                            ) {
+                                Text("\(cluster.count)")
+                                    .font(.caption.bold())
+                                    .foregroundStyle(.white)
+                                    .frame(width: 28, height: 28)
+                                    .background(.blue.opacity(0.8), in: .circle)
+                                    .accessibilityLabel("\(cluster.count) buses in this area")
+                            }
+                        }
+                    }
+                } else {
+                    ForEach(filteredVehicles) { vehicle in
+                        Annotation(
+                            vehicle.destination.localized,
+                            coordinate: vehicle.coords.clLocationCoordinate,
+                            anchor: .center,
+                        ) {
+                            VehicleAnnotationView(
+                                vehicle: vehicle,
+                                line: transitService.line(for: vehicle.lineId),
+                            )
+                            .onTapGesture {
+                                selectedVehicle = vehicle
+                            }
                         }
                     }
                 }
