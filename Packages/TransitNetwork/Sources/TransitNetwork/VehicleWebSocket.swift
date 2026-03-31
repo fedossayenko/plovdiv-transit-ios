@@ -82,9 +82,10 @@ public actor VehicleWebSocket {
                 if task.state != .running {
                     break
                 }
-                transitLogger.error("WebSocket error: \(error.localizedDescription), retrying in \(retryDelay)")
-                try? await Task.sleep(for: retryDelay)
-                retryDelay = min(retryDelay * 2, Self.maxRetryDelay)
+                let delay = retryDelay
+                transitLogger.error("WebSocket error: \(error.localizedDescription), retrying in \(delay)")
+                try? await Task.sleep(for: delay)
+                retryDelay = min(delay * 2, Self.maxRetryDelay)
             }
         }
     }

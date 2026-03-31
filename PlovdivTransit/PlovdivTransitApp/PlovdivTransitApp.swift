@@ -1,3 +1,4 @@
+import AssistantFeature
 import CoreModels
 import MapFeature
 import ScheduleFeature
@@ -39,6 +40,11 @@ struct ContentView: View {
             }
             Tab("Lines", systemImage: "bus.fill") {
                 LinesListView()
+            }
+            if isAssistantAvailable() {
+                Tab("Assistant", systemImage: "sparkle") {
+                    AssistantChatView()
+                }
             }
         }
         .overlay(alignment: .top) {

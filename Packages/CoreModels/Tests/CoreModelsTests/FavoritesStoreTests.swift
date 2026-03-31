@@ -2,10 +2,17 @@
 import Foundation
 import Testing
 
+@Suite(.serialized)
 struct FavoritesStoreTests {
+    init() {
+        // Clean state before each test
+        UserDefaults.standard.removeObject(forKey: "favoriteStops")
+        UserDefaults.standard.removeObject(forKey: "favoriteLines")
+    }
+
     @Test
     @MainActor
-    func `Toggle stop adds and removes`() {
+    func `toggle stop adds and removes`() {
         let store = FavoritesStore()
         #expect(!store.isFavorite(stopId: "test_stop"))
 
@@ -18,7 +25,7 @@ struct FavoritesStoreTests {
 
     @Test
     @MainActor
-    func `Toggle line adds and removes`() {
+    func `toggle line adds and removes`() {
         let store = FavoritesStore()
         #expect(!store.isFavorite(lineId: "test_line"))
 
@@ -31,7 +38,7 @@ struct FavoritesStoreTests {
 
     @Test
     @MainActor
-    func `Multiple favorites coexist`() {
+    func `multiple favorites coexist`() {
         let store = FavoritesStore()
         store.toggleStop("s1")
         store.toggleStop("s2")
