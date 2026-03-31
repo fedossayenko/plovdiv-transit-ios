@@ -1,0 +1,73 @@
+name: PlovdivTransit
+options:
+  bundleIdPrefix: com.plovdivtransit
+  deploymentTarget:
+    iOS: "26.0"
+  minimumXcodeGenVersion: "2.35"
+  xcodeVersion: "26"
+  defaultConfig: Debug
+
+settings:
+  base:
+    SWIFT_VERSION: "6.2"
+    SWIFT_STRICT_CONCURRENCY: complete
+    ENABLE_USER_SCRIPT_SANDBOXING: true
+
+packages:
+  CoreModels:
+    path: Packages/CoreModels
+  CoreExtensions:
+    path: Packages/CoreExtensions
+  TransitNetwork:
+    path: Packages/TransitNetwork
+  SharedUI:
+    path: Packages/SharedUI
+  MapFeature:
+    path: Packages/MapFeature
+  StopFeature:
+    path: Packages/StopFeature
+  ScheduleFeature:
+    path: Packages/ScheduleFeature
+
+targets:
+  PlovdivTransit:
+    type: application
+    platform: iOS
+    sources:
+      - PlovdivTransit
+    dependencies:
+      - package: CoreModels
+      - package: CoreExtensions
+      - package: TransitNetwork
+      - package: SharedUI
+      - package: MapFeature
+      - package: StopFeature
+      - package: ScheduleFeature
+    settings:
+      base:
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: true
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: true
+        INFOPLIST_KEY_UILaunchScreen_Generation: true
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait"
+        INFOPLIST_KEY_NSLocationWhenInUseUsageDescription: "Show your location on the transit map"
+        INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription: "Track your position relative to approaching buses"
+        PRODUCT_BUNDLE_IDENTIFIER: com.plovdivtransit.app
+        PRODUCT_NAME: "Plovdiv Transit"
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: 1
+        GENERATE_INFOPLIST_FILE: true
+        CODE_SIGN_STYLE: Automatic
+    entitlements:
+      path: PlovdivTransit/PlovdivTransit.entitlements
+
+  PlovdivTransitTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - Packages/CoreModels/Tests/CoreModelsTests
+    dependencies:
+      - target: PlovdivTransit
+      - package: CoreModels
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: true
