@@ -8,6 +8,7 @@ import TransitNetwork
 /// Bottom sheet showing details for a selected vehicle.
 struct VehicleDetailSheet: View {
     @Environment(TransitService.self) private var transitService
+    @Environment(FavoritesStore.self) private var favoritesStore
     let vehicle: Vehicle
     @State private var tripResponse: VehicleTripResponse?
     @State private var selectedStop: Stop?
@@ -77,6 +78,8 @@ struct VehicleDetailSheet: View {
             }
             .sheet(item: $selectedStop) { stop in
                 StopDepartureBoard(stop: stop)
+                    .environment(transitService)
+                    .environment(favoritesStore)
             }
         }
     }

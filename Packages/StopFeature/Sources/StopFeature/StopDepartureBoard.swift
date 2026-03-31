@@ -74,6 +74,7 @@ public struct StopDepartureBoard: View {
             }
             .sheet(item: $selectedDeparture) { departure in
                 DepartureVehicleSheet(departure: departure)
+                    .environment(transitService)
             }
             .task(id: "refresh") {
                 // Auto-refresh every 30 seconds

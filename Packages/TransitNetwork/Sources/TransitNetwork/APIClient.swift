@@ -74,7 +74,9 @@ public actor APIClient {
     // MARK: - Generic Request
 
     private func get<T: Decodable>(_ path: String) async throws -> T {
-        let url = baseURL.appendingPathComponent(path)
+        guard let url = URL(string: "\(baseURL)/\(path)") else {
+            throw APIError.invalidResponse
+        }
         var request = URLRequest(url: url)
         request.setValue("https://livetransport.eu", forHTTPHeaderField: "Origin")
         request.setValue("https://livetransport.eu/", forHTTPHeaderField: "Referer")
