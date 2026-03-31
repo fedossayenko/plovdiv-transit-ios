@@ -22,6 +22,7 @@ public struct TransitMapView: View {
     @State private var showFilterSheet = false
     @State private var filterState = MapFilterState()
     @State private var locationAuthorized = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     public init() {}
 
@@ -75,6 +76,8 @@ public struct TransitMapView: View {
                                 .onTapGesture {
                                     selectedStop = stop
                                 }
+                                .accessibilityLabel(stop.name.localized)
+                                .accessibilityAddTraits(.isButton)
                         }
                     }
                 }
@@ -91,6 +94,7 @@ public struct TransitMapView: View {
             .onMapCameraChange { context in
                 visibleSpan = context.region.span.latitudeDelta
             }
+            .animation(reduceMotion ? .none : .linear(duration: 10), value: filteredVehicles.map(\.id))
 
             // Floating controls
             VStack(spacing: 12) {

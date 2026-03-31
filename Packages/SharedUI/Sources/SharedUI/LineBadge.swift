@@ -16,5 +16,6 @@ public struct LineBadge: View {
             .padding(.horizontal, 12)
             .padding(.vertical, 4)
             .background(Color(hex: line.color), in: .capsule)
+            .accessibilityLabel("Line \(line.name)")
     }
 }

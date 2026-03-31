@@ -61,11 +61,16 @@ struct VehicleDetailSheet: View {
                         }
                     }
                 } else if loadFailed {
-                    ContentUnavailableView(
-                        "No trip info",
-                        systemImage: "bus",
-                        description: Text("Trip data is not available for this vehicle"),
-                    )
+                    ContentUnavailableView {
+                        Label("No trip info", systemImage: "bus")
+                    } description: {
+                        Text("Trip data is not available for this vehicle")
+                    } actions: {
+                        Button("Retry") {
+                            loadFailed = false
+                            Task { await loadTrip() }
+                        }
+                    }
                 } else {
                     ProgressView()
                         .frame(maxWidth: .infinity)

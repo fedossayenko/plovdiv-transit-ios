@@ -9,15 +9,13 @@ struct VehicleAnnotationView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Direction arrow
             Image(systemName: "arrowtriangle.up.fill")
                 .font(.caption2)
                 .foregroundStyle(.white)
                 .rotationEffect(.degrees(Double(vehicle.bearing)))
 
-            // Line badge
             Text(line?.name ?? "?")
-                .font(.system(size: 11, weight: .bold, design: .rounded))
+                .font(.caption2.weight(.bold))
                 .foregroundStyle(.white)
                 .frame(minWidth: 24, minHeight: 24)
                 .background(
@@ -26,5 +24,9 @@ struct VehicleAnnotationView: View {
                 )
         }
         .opacity(vehicle.speed > 0 ? 1.0 : 0.7)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(
+            "Bus \(line?.name ?? "unknown"), to \(vehicle.destination.localized), \(vehicle.speed > 0 ? "moving" : "stationary")",
+        )
     }
 }

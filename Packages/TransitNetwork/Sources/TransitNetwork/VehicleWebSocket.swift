@@ -1,3 +1,4 @@
+import CoreExtensions
 import CoreModels
 import Foundation
 
@@ -10,6 +11,8 @@ public actor VehicleWebSocket {
     private var task: URLSessionWebSocketTask?
     private var continuation: AsyncStream<[Vehicle]>.Continuation?
     private let session: URLSession
+    private var retryDelay: Duration = .seconds(2)
+    private static let maxRetryDelay: Duration = .seconds(30)
 
     public init(cityId: String = "plovdiv", session: URLSession = .shared) {
         guard let wsURL = URL(string: "wss://api.livetransport.eu/\(cityId)") else {
@@ -48,6 +51,7 @@ public actor VehicleWebSocket {
         task = nil
         continuation?.finish()
         continuation = nil
+        retryDelay = .seconds(2)
     }
 
     // MARK: - Private
@@ -60,6 +64,7 @@ public actor VehicleWebSocket {
         while task.state == .running {
             do {
                 let message = try await task.receive()
+                retryDelay = .seconds(2) // Reset on success
                 switch message {
                 case let .data(data):
                     let vehicles = try VehicleParser.parseWebSocketMessage(data)
@@ -77,7 +82,9 @@ public actor VehicleWebSocket {
                 if task.state != .running {
                     break
                 }
-                try? await Task.sleep(for: .seconds(2))
+                transitLogger.error("WebSocket error: \(error.localizedDescription), retrying in \(retryDelay)")
+                try? await Task.sleep(for: retryDelay)
+                retryDelay = min(retryDelay * 2, Self.maxRetryDelay)
             }
         }
     }
