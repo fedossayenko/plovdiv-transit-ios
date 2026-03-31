@@ -33,6 +33,6 @@ repos:
         args:
           - -c
           - |
-            git diff --cached --name-only --diff-filter=ACM -- '*.swift' | grep -v Tests/ | xargs grep -n '^\s*print(' 2>/dev/null && echo 'ERROR: Found print() - use os.Logger' && exit 1 || exit 0
+            FILES=$(git diff --cached --name-only --diff-filter=ACM -- '*.swift' | grep -v Tests/); [ -z "$FILES" ] && exit 0; echo "$FILES" | xargs grep -n '^\s*print(' 2>/dev/null && echo 'ERROR: Found print() - use os.Logger' && exit 1 || exit 0
         language: system
         pass_filenames: false

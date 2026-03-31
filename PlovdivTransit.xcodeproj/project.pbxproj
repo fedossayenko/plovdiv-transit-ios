@@ -11,12 +11,16 @@
 		2B01BF56983029E680C203FA /* StopFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 52B732B76EBB2E23D7B0A06F /* StopFeature */; };
 		32C7C82B32566C3956F25C17 /* VehicleParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49ABB7232E8DE6B1FA9E94 /* VehicleParserTests.swift */; };
 		346EB9BD48983CC4F65F118D /* TransitNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = F5B00D0F9D5FA16DBC0F672C /* TransitNetwork */; };
+		597C0BAB4C77952E70F3F4D6 /* TransitLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C13D0F11D328CDCF0F771 /* TransitLiveActivity.swift */; };
 		7C87C05CBBC1343C8AD594CA /* MapFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2588C63031B9A2C5CCA255A2 /* MapFeature */; };
 		7D5B84A6861C7B68EBF47F49 /* CoreModels in Frameworks */ = {isa = PBXBuildFile; productRef = 82CF5645B854FC13D5258486 /* CoreModels */; };
 		90F8503759DFBBA83A883A4C /* CoreModels in Frameworks */ = {isa = PBXBuildFile; productRef = 1650EB90A744E2EF3CD3AD78 /* CoreModels */; };
+		97B526340B4ADDB203C28BFE /* PlovdivTransitWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0AF8654FE38B6375455C77 /* PlovdivTransitWidgets.swift */; };
 		9B459E322DB468AEBF653FD8 /* SharedUI in Frameworks */ = {isa = PBXBuildFile; productRef = 13CD512540B1A6BEAD15BDFF /* SharedUI */; };
 		9EE9A3EB909DCF93205B7EC4 /* PlovdivTransitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188883DC09EB498812CB78A8 /* PlovdivTransitApp.swift */; };
 		C2CA0DED8316CC33D499CD94 /* CoreExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 03D77017869DB4E78DF158E9 /* CoreExtensions */; };
+		E4094E9B7B4A46A16D62CF66 /* CoreModels in Frameworks */ = {isa = PBXBuildFile; productRef = 19942BFB2B8635783D213601 /* CoreModels */; };
+		FBF688F5880D613C51B06E00 /* PlovdivTransitWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E76B3CBD96E4D3B80509A3B0 /* PlovdivTransitWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,13 +31,37 @@
 			remoteGlobalIDString = E263E021B36211F029B7ADD1;
 			remoteInfo = PlovdivTransit;
 		};
+		99C33B2BFB045A4A8C035BF3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A65DA762B5EEC95F34177001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4E2BD72B516042BE4EB19C79;
+			remoteInfo = PlovdivTransitWidgets;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D52F3A3E678BF17DF2E9486B /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FBF688F5880D613C51B06E00 /* PlovdivTransitWidgets.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		15F71B440C5FE20D92ED6820 /* PlovdivTransit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PlovdivTransit.entitlements; sourceTree = "<group>"; };
 		188883DC09EB498812CB78A8 /* PlovdivTransitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlovdivTransitApp.swift; sourceTree = "<group>"; };
 		24319EC439ED83DC125DB4F1 /* ScheduleFeature */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ScheduleFeature; path = Packages/ScheduleFeature; sourceTree = SOURCE_ROOT; };
 		3A49ABB7232E8DE6B1FA9E94 /* VehicleParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleParserTests.swift; sourceTree = "<group>"; };
+		4726A835F8147698386537C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6C0AF8654FE38B6375455C77 /* PlovdivTransitWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlovdivTransitWidgets.swift; sourceTree = "<group>"; };
+		732C13D0F11D328CDCF0F771 /* TransitLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitLiveActivity.swift; sourceTree = "<group>"; };
 		73DA0D9F59D2709AB3D1704C /* TransitNetwork */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TransitNetwork; path = Packages/TransitNetwork; sourceTree = SOURCE_ROOT; };
 		7887D9745DEA7DB89A7831D4 /* CoreExtensions */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CoreExtensions; path = Packages/CoreExtensions; sourceTree = SOURCE_ROOT; };
 		83C6B5FD978AB5E0A90B0058 /* PlovdivTransitTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = PlovdivTransitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,7 +69,8 @@
 		B21BB1C19EAD1C0DCD29ADE9 /* CoreModels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CoreModels; path = Packages/CoreModels; sourceTree = SOURCE_ROOT; };
 		C8CC35A26C851D482102BDF6 /* SharedUI */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SharedUI; path = Packages/SharedUI; sourceTree = SOURCE_ROOT; };
 		D28879CDCBF60E6FD2BDE8BF /* StopFeature */ = {isa = PBXFileReference; lastKnownFileType = folder; name = StopFeature; path = Packages/StopFeature; sourceTree = SOURCE_ROOT; };
-		DBA61B2AD7167002F3E95DC2 /* Plovdiv Transit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Plovdiv Transit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBA61B2AD7167002F3E95DC2 /* PlovdivTransit.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PlovdivTransit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E76B3CBD96E4D3B80509A3B0 /* PlovdivTransitWidgets.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = PlovdivTransitWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +79,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				90F8503759DFBBA83A883A4C /* CoreModels in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53CA315B9ED25C25AA535A10 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4094E9B7B4A46A16D62CF66 /* CoreModels in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,11 +138,22 @@
 			path = PlovdivTransit;
 			sourceTree = "<group>";
 		};
+		A59FD76A02D9699665E77071 /* PlovdivTransitWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				4726A835F8147698386537C4 /* Info.plist */,
+				6C0AF8654FE38B6375455C77 /* PlovdivTransitWidgets.swift */,
+				732C13D0F11D328CDCF0F771 /* TransitLiveActivity.swift */,
+			);
+			path = PlovdivTransitWidgets;
+			sourceTree = "<group>";
+		};
 		B22E93494EE7D6DA2EC02D13 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DBA61B2AD7167002F3E95DC2 /* Plovdiv Transit.app */,
+				DBA61B2AD7167002F3E95DC2 /* PlovdivTransit.app */,
 				83C6B5FD978AB5E0A90B0058 /* PlovdivTransitTests.xctest */,
+				E76B3CBD96E4D3B80509A3B0 /* PlovdivTransitWidgets.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -116,6 +164,7 @@
 				FAA4AFD1913FC716D4DEC3BA /* CoreModelsTests */,
 				43D84C1B6AF6C6879B6EB16E /* Packages */,
 				7EC13D66E41B6CA30A6A7853 /* PlovdivTransit */,
+				A59FD76A02D9699665E77071 /* PlovdivTransitWidgets */,
 				B22E93494EE7D6DA2EC02D13 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -152,16 +201,37 @@
 			productReference = 83C6B5FD978AB5E0A90B0058 /* PlovdivTransitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		4E2BD72B516042BE4EB19C79 /* PlovdivTransitWidgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38264964216BFB1919BEE636 /* Build configuration list for PBXNativeTarget "PlovdivTransitWidgets" */;
+			buildPhases = (
+				A5AEC518B82110DDD2E65E0E /* Sources */,
+				53CA315B9ED25C25AA535A10 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PlovdivTransitWidgets;
+			packageProductDependencies = (
+				19942BFB2B8635783D213601 /* CoreModels */,
+			);
+			productName = PlovdivTransitWidgets;
+			productReference = E76B3CBD96E4D3B80509A3B0 /* PlovdivTransitWidgets.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		E263E021B36211F029B7ADD1 /* PlovdivTransit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3D8B84FD98DDCE722193389A /* Build configuration list for PBXNativeTarget "PlovdivTransit" */;
 			buildPhases = (
 				858201D665C0B48B63B11D78 /* Sources */,
 				960E35F41C09570C4325295D /* Frameworks */,
+				D52F3A3E678BF17DF2E9486B /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				28EACB34943064BD911746D1 /* PBXTargetDependency */,
 			);
 			name = PlovdivTransit;
 			packageProductDependencies = (
@@ -174,7 +244,7 @@
 				B8EFF4E1E928B42B70DDBCDF /* ScheduleFeature */,
 			);
 			productName = PlovdivTransit;
-			productReference = DBA61B2AD7167002F3E95DC2 /* Plovdiv Transit.app */;
+			productReference = DBA61B2AD7167002F3E95DC2 /* PlovdivTransit.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -186,6 +256,9 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
+					4E2BD72B516042BE4EB19C79 = {
+						ProvisioningStyle = Automatic;
+					};
 					E263E021B36211F029B7ADD1 = {
 						ProvisioningStyle = Automatic;
 					};
@@ -216,6 +289,7 @@
 			targets = (
 				E263E021B36211F029B7ADD1 /* PlovdivTransit */,
 				0652093C032966F81EF96890 /* PlovdivTransitTests */,
+				4E2BD72B516042BE4EB19C79 /* PlovdivTransitWidgets */,
 			);
 		};
 /* End PBXProject section */
@@ -226,6 +300,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EE9A3EB909DCF93205B7EC4 /* PlovdivTransitApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5AEC518B82110DDD2E65E0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97B526340B4ADDB203C28BFE /* PlovdivTransitWidgets.swift in Sources */,
+				597C0BAB4C77952E70F3F4D6 /* TransitLiveActivity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +323,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		28EACB34943064BD911746D1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4E2BD72B516042BE4EB19C79 /* PlovdivTransitWidgets */;
+			targetProxy = 99C33B2BFB045A4A8C035BF3 /* PBXContainerItemProxy */;
+		};
 		E2AD5BFE77655F0D98D42D04 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E263E021B36211F029B7ADD1 /* PlovdivTransit */;
@@ -323,6 +411,25 @@
 			};
 			name = Release;
 		};
+		24DA71AA1EF71CAA20889EA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = PlovdivTransitWidgets/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.plovdivtransit.app.widgets;
+				PRODUCT_NAME = PlovdivTransitWidgets;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		528FFCBAD0D56379F0A69BC1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -340,6 +447,25 @@
 			};
 			name = Release;
 		};
+		9700C8F336EDEA5A56CFC6E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = PlovdivTransitWidgets/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.plovdivtransit.app.widgets;
+				PRODUCT_NAME = PlovdivTransitWidgets;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		9E4A357081817BF10BEE9B2F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -348,10 +474,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z82Q4MK9UW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Track your position relative to approaching buses";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show your location on the transit map";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -441,10 +567,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z82Q4MK9UW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Track your position relative to approaching buses";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show your location on the transit map";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -464,6 +590,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		38264964216BFB1919BEE636 /* Build configuration list for PBXNativeTarget "PlovdivTransitWidgets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24DA71AA1EF71CAA20889EA7 /* Debug */,
+				9700C8F336EDEA5A56CFC6E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		3D8B84FD98DDCE722193389A /* Build configuration list for PBXNativeTarget "PlovdivTransit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -534,6 +669,10 @@
 			productName = SharedUI;
 		};
 		1650EB90A744E2EF3CD3AD78 /* CoreModels */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoreModels;
+		};
+		19942BFB2B8635783D213601 /* CoreModels */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CoreModels;
 		};

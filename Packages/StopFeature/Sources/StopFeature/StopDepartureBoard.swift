@@ -51,6 +51,22 @@ public struct StopDepartureBoard: View {
                             )
                         }
                         .buttonStyle(.plain)
+                        .swipeActions(edge: .trailing) {
+                            if departure.activeTrip == true {
+                                Button {
+                                    LiveActivityManager.shared.startTracking(
+                                        departure: departure,
+                                        line: transitService.line(for: departure.lineId),
+                                        stopId: stop.id,
+                                        stopName: stop.name.localized,
+                                        transitService: transitService,
+                                    )
+                                } label: {
+                                    Label("Track", systemImage: "clock.badge")
+                                }
+                                .tint(.blue)
+                            }
+                        }
                     }
                     .refreshable {
                         await loadDepartures()
