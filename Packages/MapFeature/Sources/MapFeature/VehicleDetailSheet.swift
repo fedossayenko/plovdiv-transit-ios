@@ -12,6 +12,7 @@ struct VehicleDetailSheet: View {
     let vehicle: Vehicle
     @State private var tripResponse: VehicleTripResponse?
     @State private var selectedStop: Stop?
+    @State private var loadFailed = false
 
     var body: some View {
         NavigationStack {
@@ -59,6 +60,12 @@ struct VehicleDetailSheet: View {
                             }
                         }
                     }
+                } else if loadFailed {
+                    ContentUnavailableView(
+                        "No trip info",
+                        systemImage: "bus",
+                        description: Text("Trip data is not available for this vehicle"),
+                    )
                 } else {
                     ProgressView()
                         .frame(maxWidth: .infinity)
@@ -89,6 +96,11 @@ struct VehicleDetailSheet: View {
             let response = try await transitService.fetchVehicleTrip(vehicleId: vehicle.id)
             tripResponse = response
 
+            if response.trip == nil {
+                loadFailed = true
+                return
+            }
+
             if let shape = response.trip?.shape {
                 let clCoords = PolylineDecoder.decode(shape)
                 transitService.selectedTripShape = clCoords.map {
@@ -96,7 +108,7 @@ struct VehicleDetailSheet: View {
                 }
             }
         } catch {
-            // Trip not available
+            loadFailed = true
         }
     }
 }

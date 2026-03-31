@@ -55,7 +55,8 @@ public actor APIClient {
 
     /// Fetches the current trip for a vehicle.
     public func fetchVehicleTrip(vehicleId: String, tripId: String? = nil) async throws -> VehicleTripResponse {
-        var path = "vehicle/\(vehicleId.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? vehicleId)/trip"
+        let encodedId = vehicleId.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? vehicleId
+        var path = "vehicle/\(encodedId)/trip"
         if let tripId {
             path += "?trip=\(tripId)"
         }
