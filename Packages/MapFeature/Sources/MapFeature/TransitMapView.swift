@@ -129,7 +129,7 @@ public struct TransitMapView: View {
             .onMapCameraChange { context in
                 visibleSpan = context.region.span.latitudeDelta
             }
-            .animation(reduceMotion ? .none : .linear(duration: 10), value: transitService.vehicles.count)
+            .animation(reduceMotion ? .none : .linear(duration: 10), value: transitService.vehicleUpdateCounter)
 
             // Floating controls
             VStack(spacing: 12) {

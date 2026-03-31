@@ -113,6 +113,7 @@ struct VehicleDetailSheet: View {
                 }
             }
         } catch {
+            transitLogger.error("Vehicle trip load failed: \(error.localizedDescription)")
             loadFailed = true
         }
     }

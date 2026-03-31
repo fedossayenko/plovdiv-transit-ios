@@ -13,6 +13,7 @@ public final class TransitService {
     private(set) public var isLoading = false
     private(set) public var error: Error?
     public var selectedTripShape: [Coordinate]?
+    private(set) public var vehicleUpdateCounter = 0
 
     private let apiClient: APIClient
     private let webSocket: VehicleWebSocket
@@ -129,6 +130,7 @@ public final class TransitService {
                 }
                 await MainActor.run {
                     self.vehicles = vehicleBatch
+                    self.vehicleUpdateCounter += 1
                 }
             }
 
