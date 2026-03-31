@@ -31,6 +31,9 @@ struct ContentView: View {
             Tab("Map", systemImage: "map.fill") {
                 TransitMapView()
             }
+            Tab("Stops", systemImage: "magnifyingglass") {
+                StopSearchView()
+            }
             Tab("Lines", systemImage: "bus.fill") {
                 LinesListView()
             }

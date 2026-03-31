@@ -21,19 +21,21 @@ public struct LinesListView: View {
                             .sorted { lineNumber($0.name) < lineNumber($1.name) }
 
                         ForEach(lines) { line in
-                            HStack {
-                                LineBadge(line: line)
-                                Text(line.routeName)
-                                    .font(.body)
-                                Spacer()
-                                let count = transitService.vehicles(onLine: line.id).count
-                                if count > 0 {
-                                    Text("\(count)")
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                        .padding(.horizontal, 8)
-                                        .padding(.vertical, 2)
-                                        .background(.quaternary, in: .capsule)
+                            NavigationLink(value: line) {
+                                HStack {
+                                    LineBadge(line: line)
+                                    Text(line.routeName)
+                                        .font(.body)
+                                    Spacer()
+                                    let count = transitService.vehicles(onLine: line.id).count
+                                    if count > 0 {
+                                        Text("\(count)")
+                                            .font(.caption)
+                                            .foregroundStyle(.secondary)
+                                            .padding(.horizontal, 8)
+                                            .padding(.vertical, 2)
+                                            .background(.quaternary, in: .capsule)
+                                    }
                                 }
                             }
                         }
@@ -41,6 +43,9 @@ public struct LinesListView: View {
                 }
             }
             .navigationTitle("Lines")
+            .navigationDestination(for: TransitLine.self) { line in
+                LineDetailView(line: line)
+            }
         }
     }
 

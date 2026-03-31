@@ -11,11 +11,12 @@ let package = Package(
         .package(path: "../CoreModels"),
         .package(path: "../TransitNetwork"),
         .package(path: "../SharedUI"),
+        .package(path: "../CoreExtensions"),
     ],
     targets: [
         .target(
             name: "ScheduleFeature",
-            dependencies: ["CoreModels", "TransitNetwork", "SharedUI"],
+            dependencies: ["CoreModels", "TransitNetwork", "SharedUI", "CoreExtensions"],
         ),
     ],
 )

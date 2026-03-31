@@ -60,12 +60,28 @@ struct VehicleDetailSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .presentationDetents([.medium, .large])
             .task {
-                do {
-                    tripResponse = try await transitService.fetchVehicleTrip(vehicleId: vehicle.id)
-                } catch {
-                    // Trip not available
+                await loadTrip()
+            }
+            .onDisappear {
+                transitService.selectedTripShape = nil
+            }
+        }
+    }
+
+    private func loadTrip() async {
+        do {
+            let response = try await transitService.fetchVehicleTrip(vehicleId: vehicle.id)
+            tripResponse = response
+
+            // Decode route polyline and show on map
+            if let shape = response.trip?.shape {
+                let clCoords = PolylineDecoder.decode(shape)
+                transitService.selectedTripShape = clCoords.map {
+                    Coordinate(latitude: $0.latitude, longitude: $0.longitude)
                 }
             }
+        } catch {
+            // Trip not available
         }
     }
 }

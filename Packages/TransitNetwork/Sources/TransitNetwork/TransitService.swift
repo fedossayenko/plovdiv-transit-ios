@@ -6,12 +6,13 @@ import Foundation
 @Observable
 @MainActor
 public final class TransitService {
-    public private(set) var lines: [TransitLine] = []
-    public private(set) var stops: [Stop] = []
-    public private(set) var vehicles: [Vehicle] = []
-    public private(set) var isConnected = false
-    public private(set) var isLoading = false
-    public private(set) var error: Error?
+    private(set) public var lines: [TransitLine] = []
+    private(set) public var stops: [Stop] = []
+    private(set) public var vehicles: [Vehicle] = []
+    private(set) public var isConnected = false
+    private(set) public var isLoading = false
+    private(set) public var error: Error?
+    public var selectedTripShape: [Coordinate]?
 
     private let apiClient: APIClient
     private let webSocket: VehicleWebSocket
@@ -84,6 +85,14 @@ public final class TransitService {
     /// Fetches the current trip info for a vehicle.
     public func fetchVehicleTrip(vehicleId: String) async throws -> VehicleTripResponse {
         try await apiClient.fetchVehicleTrip(vehicleId: vehicleId)
+    }
+
+    /// Fetches trip info for the first active vehicle on a line.
+    public func fetchTripForLine(lineId: String) async throws -> VehicleTripResponse? {
+        guard let firstVehicle = vehicles.first(where: { $0.lineId == lineId }) else {
+            return nil
+        }
+        return try await apiClient.fetchVehicleTrip(vehicleId: firstVehicle.id)
     }
 
     // MARK: - Private

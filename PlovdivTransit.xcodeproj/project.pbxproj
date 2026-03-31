@@ -41,7 +41,7 @@
 		B21BB1C19EAD1C0DCD29ADE9 /* CoreModels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CoreModels; path = Packages/CoreModels; sourceTree = SOURCE_ROOT; };
 		C8CC35A26C851D482102BDF6 /* SharedUI */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SharedUI; path = Packages/SharedUI; sourceTree = SOURCE_ROOT; };
 		D28879CDCBF60E6FD2BDE8BF /* StopFeature */ = {isa = PBXFileReference; lastKnownFileType = folder; name = StopFeature; path = Packages/StopFeature; sourceTree = SOURCE_ROOT; };
-		DBA61B2AD7167002F3E95DC2 /* Plovdiv Transit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Plovdiv Transit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBA61B2AD7167002F3E95DC2 /* PlovdivTransit.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PlovdivTransit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +104,7 @@
 		B22E93494EE7D6DA2EC02D13 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DBA61B2AD7167002F3E95DC2 /* Plovdiv Transit.app */,
+				DBA61B2AD7167002F3E95DC2 /* PlovdivTransit.app */,
 				83C6B5FD978AB5E0A90B0058 /* PlovdivTransitTests.xctest */,
 			);
 			name = Products;
@@ -174,7 +174,7 @@
 				B8EFF4E1E928B42B70DDBCDF /* ScheduleFeature */,
 			);
 			productName = PlovdivTransit;
-			productReference = DBA61B2AD7167002F3E95DC2 /* Plovdiv Transit.app */;
+			productReference = DBA61B2AD7167002F3E95DC2 /* PlovdivTransit.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -348,7 +348,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z82Q4MK9UW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Track your position relative to approaching buses";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show your location on the transit map";
@@ -441,7 +440,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z82Q4MK9UW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Track your position relative to approaching buses";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show your location on the transit map";

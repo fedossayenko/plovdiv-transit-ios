@@ -45,6 +45,9 @@
 --selfrequired
 --redundanttype inferred
 
+# Modifiers
+--modifierorder nonisolated,public,private,internal,fileprivate,open,override,final,static,class
+
 # Strip
 --stripunusedargs closure-only
 --header strip

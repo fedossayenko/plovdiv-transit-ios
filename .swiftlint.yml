@@ -14,6 +14,7 @@ disabled_rules:
   - opening_brace
   - trailing_comma
   - vertical_whitespace
+  - modifier_order
 
 # Enable useful opt-in rules
 opt_in_rules:
@@ -37,7 +38,6 @@ opt_in_rules:
   - last_where
   - legacy_multiple
   - lower_acl_than_parent
-  - modifier_order
   - operator_usage_whitespace
   - overridden_super_call
   - prefer_self_in_static_references
