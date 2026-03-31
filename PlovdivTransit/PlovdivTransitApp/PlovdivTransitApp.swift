@@ -29,6 +29,8 @@ struct PlovdivTransitApp: App {
 
 struct ContentView: View {
     @Environment(TransitService.self) private var transitService
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
+    @State private var showOnboarding = false
 
     var body: some View {
         TabView {
@@ -67,5 +69,14 @@ struct ContentView: View {
             }
         }
         .animation(.easeInOut, value: transitService.isConnected)
+        .fullScreenCover(isPresented: $showOnboarding) {
+            OnboardingView(isPresented: $showOnboarding)
+        }
+        .onAppear {
+            if !hasSeenOnboarding {
+                showOnboarding = true
+                hasSeenOnboarding = true
+            }
+        }
     }
 }
