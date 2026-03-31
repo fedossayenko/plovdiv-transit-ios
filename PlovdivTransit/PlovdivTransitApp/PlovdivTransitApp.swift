@@ -1,3 +1,4 @@
+import CoreModels
 import MapFeature
 import ScheduleFeature
 import StopFeature
@@ -9,11 +10,13 @@ import TransitNetwork
 @main
 struct PlovdivTransitApp: App {
     @State private var transitService = TransitService()
+    @State private var favoritesStore = FavoritesStore()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(transitService)
+                .environment(favoritesStore)
                 .task {
                     await transitService.start()
                 }

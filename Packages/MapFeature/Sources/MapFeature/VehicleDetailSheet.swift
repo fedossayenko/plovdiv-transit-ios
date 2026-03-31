@@ -1,14 +1,18 @@
 import CoreExtensions
 import CoreModels
 import SharedUI
+import StopFeature
 import SwiftUI
 import TransitNetwork
 
 /// Bottom sheet showing details for a selected vehicle.
 struct VehicleDetailSheet: View {
     @Environment(TransitService.self) private var transitService
+    @Environment(FavoritesStore.self) private var favoritesStore
     let vehicle: Vehicle
     @State private var tripResponse: VehicleTripResponse?
+    @State private var selectedStop: Stop?
+    @State private var loadFailed = false
 
     var body: some View {
         NavigationStack {
@@ -33,21 +37,35 @@ struct VehicleDetailSheet: View {
                         VStack(alignment: .leading, spacing: 8) {
                             ForEach(Array(trip.stops.enumerated()), id: \.offset) { index, tripStop in
                                 let stop = transitService.stop(for: tripStop.id)
-                                HStack {
-                                    Circle()
-                                        .fill(index == nextStopIndex ? Color.accentColor : .secondary)
-                                        .frame(width: 8, height: 8)
-                                    Text(stop?.name.localized ?? tripStop.id)
-                                        .font(index == nextStopIndex ? .body.bold() : .body)
-                                        .foregroundStyle(index < nextStopIndex ? .secondary : .primary)
-                                    Spacer()
-                                    Text(tripStop.scheduled.transitTimeString)
-                                        .font(TransitTypography.caption)
-                                        .foregroundStyle(.secondary)
+                                Button {
+                                    selectedStop = stop
+                                } label: {
+                                    HStack {
+                                        Circle()
+                                            .fill(index == nextStopIndex ? Color.accentColor : .secondary)
+                                            .frame(width: 8, height: 8)
+                                        Text(stop?.name.localized ?? tripStop.id)
+                                            .font(index == nextStopIndex ? .body.bold() : .body)
+                                            .foregroundStyle(index < nextStopIndex ? .secondary : .primary)
+                                        Spacer()
+                                        Text(tripStop.scheduled.transitTimeString)
+                                            .font(TransitTypography.caption)
+                                            .foregroundStyle(.secondary)
+                                        Image(systemName: "chevron.right")
+                                            .font(.caption2)
+                                            .foregroundStyle(.tertiary)
+                                    }
                                 }
+                                .buttonStyle(.plain)
                             }
                         }
                     }
+                } else if loadFailed {
+                    ContentUnavailableView(
+                        "No trip info",
+                        systemImage: "bus",
+                        description: Text("Trip data is not available for this vehicle"),
+                    )
                 } else {
                     ProgressView()
                         .frame(maxWidth: .infinity)
@@ -65,6 +83,11 @@ struct VehicleDetailSheet: View {
             .onDisappear {
                 transitService.selectedTripShape = nil
             }
+            .sheet(item: $selectedStop) { stop in
+                StopDepartureBoard(stop: stop)
+                    .environment(transitService)
+                    .environment(favoritesStore)
+            }
         }
     }
 
@@ -73,7 +96,11 @@ struct VehicleDetailSheet: View {
             let response = try await transitService.fetchVehicleTrip(vehicleId: vehicle.id)
             tripResponse = response
 
-            // Decode route polyline and show on map
+            if response.trip == nil {
+                loadFailed = true
+                return
+            }
+
             if let shape = response.trip?.shape {
                 let clCoords = PolylineDecoder.decode(shape)
                 transitService.selectedTripShape = clCoords.map {
@@ -81,7 +108,7 @@ struct VehicleDetailSheet: View {
                 }
             }
         } catch {
-            // Trip not available
+            loadFailed = true
         }
     }
 }

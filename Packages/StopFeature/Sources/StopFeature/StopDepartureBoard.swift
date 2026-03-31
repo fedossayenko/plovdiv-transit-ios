@@ -9,10 +9,12 @@ import TransitNetwork
 /// Virtual departure board for a transit stop, showing upcoming departures.
 public struct StopDepartureBoard: View {
     @Environment(TransitService.self) private var transitService
+    @Environment(FavoritesStore.self) private var favoritesStore
     let stop: Stop
     @State private var departures: [Departure] = []
     @State private var isLoading = true
     @State private var error: Error?
+    @State private var selectedDeparture: Departure?
 
     public init(stop: Stop) {
         self.stop = stop
@@ -37,10 +39,18 @@ public struct StopDepartureBoard: View {
                     )
                 } else {
                     List(departures) { departure in
-                        DepartureRow(
-                            departure: departure,
-                            line: transitService.line(for: departure.lineId),
-                        )
+                        Button {
+                            if departure.vehicleId != nil, departure.activeTrip == true {
+                                selectedDeparture = departure
+                            }
+                        } label: {
+                            DepartureRow(
+                                departure: departure,
+                                line: transitService.line(for: departure.lineId),
+                                hasVehicle: departure.vehicleId != nil && departure.activeTrip == true,
+                            )
+                        }
+                        .buttonStyle(.plain)
                     }
                     .refreshable {
                         await loadDepartures()
@@ -49,8 +59,22 @@ public struct StopDepartureBoard: View {
             }
             .navigationTitle(stop.name.localized)
             .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        favoritesStore.toggleStop(stop.id)
+                    } label: {
+                        Image(systemName: favoritesStore.isFavorite(stopId: stop.id) ? "star.fill" : "star")
+                            .foregroundStyle(favoritesStore.isFavorite(stopId: stop.id) ? .yellow : .secondary)
+                    }
+                }
+            }
             .task {
                 await loadDepartures()
+            }
+            .sheet(item: $selectedDeparture) { departure in
+                DepartureVehicleSheet(departure: departure)
+                    .environment(transitService)
             }
             .task(id: "refresh") {
                 // Auto-refresh every 30 seconds
@@ -79,6 +103,7 @@ public struct StopDepartureBoard: View {
 struct DepartureRow: View {
     let departure: Departure
     let line: TransitLine?
+    var hasVehicle = false
 
     var body: some View {
         HStack {
@@ -109,6 +134,12 @@ struct DepartureRow: View {
                         .font(TransitTypography.caption)
                         .foregroundStyle(.secondary)
                 }
+            }
+
+            if hasVehicle {
+                Image(systemName: "chevron.right")
+                    .font(.caption2)
+                    .foregroundStyle(.tertiary)
             }
         }
         .padding(.vertical, 4)

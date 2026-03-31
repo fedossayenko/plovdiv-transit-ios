@@ -21,11 +21,31 @@ public actor APIClient {
         decoder = JSONDecoder()
     }
 
+    // MARK: - Cache
+
+    private static var cacheURL: URL {
+        FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("transit_data.json")
+    }
+
+    /// Loads cached transit data from disk.
+    public func loadCachedTransitData() -> TransitData? {
+        guard let data = try? Data(contentsOf: Self.cacheURL) else {
+            return nil
+        }
+        return try? JSONDecoder().decode(TransitData.self, from: data)
+    }
+
     // MARK: - Endpoints
 
-    /// Fetches all lines and stops for the city.
+    /// Fetches all lines and stops for the city, caching the result.
     public func fetchTransitData() async throws -> TransitData {
-        try await get("data")
+        let result: TransitData = try await get("data")
+        // Cache in background
+        if let encoded = try? JSONEncoder().encode(result) {
+            try? encoded.write(to: Self.cacheURL, options: .atomic)
+        }
+        return result
     }
 
     /// Fetches the virtual departure board for a stop.
@@ -35,7 +55,8 @@ public actor APIClient {
 
     /// Fetches the current trip for a vehicle.
     public func fetchVehicleTrip(vehicleId: String, tripId: String? = nil) async throws -> VehicleTripResponse {
-        var path = "vehicle/\(vehicleId.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? vehicleId)/trip"
+        let encodedId = vehicleId.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? vehicleId
+        var path = "vehicle/\(encodedId)/trip"
         if let tripId {
             path += "?trip=\(tripId)"
         }
@@ -54,7 +75,9 @@ public actor APIClient {
     // MARK: - Generic Request
 
     private func get<T: Decodable>(_ path: String) async throws -> T {
-        let url = baseURL.appendingPathComponent(path)
+        guard let url = URL(string: "\(baseURL)/\(path)") else {
+            throw APIError.invalidResponse
+        }
         var request = URLRequest(url: url)
         request.setValue("https://livetransport.eu", forHTTPHeaderField: "Origin")
         request.setValue("https://livetransport.eu/", forHTTPHeaderField: "Referer")

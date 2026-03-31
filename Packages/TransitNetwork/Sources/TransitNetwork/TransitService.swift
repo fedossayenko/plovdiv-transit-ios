@@ -1,5 +1,6 @@
 import CoreModels
 import Foundation
+import SwiftUI
 
 /// High-level transit service that combines REST API and WebSocket data.
 /// This is the main entry point for feature modules to access transit data.
@@ -30,23 +31,40 @@ public final class TransitService {
     // MARK: - Lifecycle
 
     /// Loads initial transit data (lines + stops) and connects WebSocket.
+    /// Loads cache first for instant UI, then refreshes from network.
     public func start() async {
         isLoading = true
         error = nil
 
-        do {
-            let data = try await apiClient.fetchTransitData()
-            lines = data.lines
-            stops = data.stops
-            linesById = Dictionary(uniqueKeysWithValues: data.lines.map { ($0.id, $0) })
-            stopsById = Dictionary(uniqueKeysWithValues: data.stops.map { ($0.id, $0) })
-            isLoading = false
-
-            connectVehicleStream()
-        } catch {
-            self.error = error
+        // Load cache first for instant UI
+        if let cached = await apiClient.loadCachedTransitData() {
+            applyTransitData(cached)
             isLoading = false
         }
+
+        // Fetch fresh data from network
+        do {
+            let data = try await apiClient.fetchTransitData()
+            applyTransitData(data)
+            isLoading = false
+            connectVehicleStream()
+        } catch {
+            // If we have cached data, still connect WebSocket
+            if !lines.isEmpty {
+                isLoading = false
+                connectVehicleStream()
+            } else {
+                self.error = error
+                isLoading = false
+            }
+        }
+    }
+
+    private func applyTransitData(_ data: TransitData) {
+        lines = data.lines
+        stops = data.stops
+        linesById = Dictionary(uniqueKeysWithValues: data.lines.map { ($0.id, $0) })
+        stopsById = Dictionary(uniqueKeysWithValues: data.stops.map { ($0.id, $0) })
     }
 
     /// Disconnects from the vehicle stream.
@@ -111,7 +129,9 @@ public final class TransitService {
                     break
                 }
                 await MainActor.run {
-                    self.vehicles = vehicleBatch
+                    withAnimation(.linear(duration: 10)) {
+                        self.vehicles = vehicleBatch
+                    }
                 }
             }
 
