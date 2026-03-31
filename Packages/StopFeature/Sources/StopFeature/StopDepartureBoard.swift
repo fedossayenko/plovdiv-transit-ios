@@ -57,6 +57,7 @@ public struct StopDepartureBoard: View {
                                     LiveActivityManager.shared.startTracking(
                                         departure: departure,
                                         line: transitService.line(for: departure.lineId),
+                                        stopId: stop.id,
                                         stopName: stop.name.localized,
                                         transitService: transitService,
                                     )

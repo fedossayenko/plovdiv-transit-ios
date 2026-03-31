@@ -17,6 +17,7 @@ public final class LiveActivityManager {
     public func startTracking(
         departure: Departure,
         line: TransitLine?,
+        stopId: String,
         stopName: String,
         transitService: TransitService,
     ) {
@@ -40,7 +41,10 @@ public final class LiveActivityManager {
         )
 
         do {
-            let content = ActivityContent(state: initialState, staleDate: nil)
+            let content = ActivityContent(
+                state: initialState,
+                staleDate: Date.now.addingTimeInterval(90),
+            )
             let activity = try Activity.request(
                 attributes: attributes,
                 content: content,
@@ -48,7 +52,7 @@ public final class LiveActivityManager {
             activityId = activity.id
 
             startUpdateLoop(
-                stopId: extractStopId(from: departure),
+                stopId: stopId,
                 lineId: departure.lineId,
                 destination: departure.destination.localized,
                 transitService: transitService,
@@ -94,11 +98,6 @@ public final class LiveActivityManager {
                     if let matching = departures.first(where: {
                         $0.lineId == lineId && $0.destination.localized == destination
                     }) {
-                        let state = TransitActivityAttributes.ContentState(
-                            minutesUntilArrival: matching.minutesUntil,
-                            delaySeconds: matching.time.delay,
-                            scheduledTime: matching.time.scheduled,
-                        )
                         updateActivity(
                             id: activityId,
                             minutes: matching.minutesUntil,
@@ -147,16 +146,11 @@ public final class LiveActivityManager {
                 state: TransitActivityAttributes.ContentState(
                     minutesUntilArrival: minutes, delaySeconds: delay, scheduledTime: scheduled,
                 ),
-                staleDate: nil,
+                staleDate: Date.now.addingTimeInterval(90),
             )
             for activity in Activity<TransitActivityAttributes>.activities where activity.id == id {
                 await activity.update(content)
             }
         }
-    }
-
-    private func extractStopId(from departure: Departure) -> String {
-        let parts = departure.tripId.split(separator: "_")
-        return parts.count >= 2 ? String(parts[1]) : ""
     }
 }
