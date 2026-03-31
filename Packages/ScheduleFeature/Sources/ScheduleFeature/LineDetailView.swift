@@ -8,10 +8,12 @@ import TransitNetwork
 /// Detail view for a transit line showing live vehicles, route map, and stops.
 public struct LineDetailView: View {
     @Environment(TransitService.self) private var transitService
+    @Environment(FavoritesStore.self) private var favoritesStore
     let line: TransitLine
 
     @State private var tripResponse: VehicleTripResponse?
     @State private var isLoading = true
+    @State private var selectedVehicle: Vehicle?
 
     public init(line: TransitLine) {
         self.line = line
@@ -57,7 +59,10 @@ public struct LineDetailView: View {
                         .foregroundStyle(.secondary)
                 } else {
                     ForEach(lineVehicles) { vehicle in
-                        LineVehicleRow(vehicle: vehicle)
+                        Button { selectedVehicle = vehicle } label: {
+                            LineVehicleRow(vehicle: vehicle)
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
             }
@@ -94,6 +99,17 @@ public struct LineDetailView: View {
             ToolbarItem(placement: .principal) {
                 LineBadge(line: line)
             }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    favoritesStore.toggleLine(line.id)
+                } label: {
+                    Image(systemName: favoritesStore.isFavorite(lineId: line.id) ? "star.fill" : "star")
+                        .foregroundStyle(favoritesStore.isFavorite(lineId: line.id) ? .yellow : .secondary)
+                }
+            }
+        }
+        .sheet(item: $selectedVehicle) { vehicle in
+            VehicleTripSheet(vehicle: vehicle)
         }
         .task {
             await loadTrip()

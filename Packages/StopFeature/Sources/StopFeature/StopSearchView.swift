@@ -9,6 +9,7 @@ import TransitNetwork
 /// Searchable stop list with nearby stops section.
 public struct StopSearchView: View {
     @Environment(TransitService.self) private var transitService
+    @Environment(FavoritesStore.self) private var favoritesStore
     @State private var searchText = ""
     @State private var locationProvider = LocationProvider()
 
@@ -45,6 +46,20 @@ public struct StopSearchView: View {
         NavigationStack {
             List {
                 if searchText.isEmpty {
+                    // Favorite stops
+                    let favoriteStops = favoritesStore.favoriteStopIds.compactMap { transitService.stop(for: $0) }
+                    if !favoriteStops.isEmpty {
+                        Section("Favorites") {
+                            ForEach(favoriteStops) { stop in
+                                NavigationLink {
+                                    StopDepartureBoard(stop: stop)
+                                } label: {
+                                    StopRow(stop: stop, userLocation: locationProvider.userLocation)
+                                }
+                            }
+                        }
+                    }
+
                     // Nearby stops
                     if !nearbyStops.isEmpty {
                         Section("Nearby") {

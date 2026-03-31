@@ -21,11 +21,31 @@ public actor APIClient {
         decoder = JSONDecoder()
     }
 
+    // MARK: - Cache
+
+    private static var cacheURL: URL {
+        FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("transit_data.json")
+    }
+
+    /// Loads cached transit data from disk.
+    public func loadCachedTransitData() -> TransitData? {
+        guard let data = try? Data(contentsOf: Self.cacheURL) else {
+            return nil
+        }
+        return try? JSONDecoder().decode(TransitData.self, from: data)
+    }
+
     // MARK: - Endpoints
 
-    /// Fetches all lines and stops for the city.
+    /// Fetches all lines and stops for the city, caching the result.
     public func fetchTransitData() async throws -> TransitData {
-        try await get("data")
+        let result: TransitData = try await get("data")
+        // Cache in background
+        if let encoded = try? JSONEncoder().encode(result) {
+            try? encoded.write(to: Self.cacheURL, options: .atomic)
+        }
+        return result
     }
 
     /// Fetches the virtual departure board for a stop.

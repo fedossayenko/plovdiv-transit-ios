@@ -6,6 +6,7 @@ import TransitNetwork
 /// Sheet for filtering which lines and vehicle types appear on the map.
 struct MapFilterSheet: View {
     @Environment(TransitService.self) private var transitService
+    @Environment(\.dismiss) private var dismiss
     @Binding var filterState: MapFilterState
 
     var body: some View {
@@ -54,7 +55,7 @@ struct MapFilterSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {}
+                    Button("Done") { dismiss() }
                 }
             }
         }
