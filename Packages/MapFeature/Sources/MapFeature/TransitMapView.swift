@@ -1,4 +1,5 @@
 import CoreExtensions
+import CoreLocation
 import CoreModels
 import MapKit
 import SharedUI
@@ -20,6 +21,7 @@ public struct TransitMapView: View {
     @State private var visibleSpan = 0.05
     @State private var showFilterSheet = false
     @State private var filterState = MapFilterState()
+    @State private var locationAuthorized = false
 
     public init() {}
 
@@ -77,7 +79,9 @@ public struct TransitMapView: View {
                     }
                 }
 
-                UserAnnotation()
+                if locationAuthorized {
+                    UserAnnotation()
+                }
             }
             .mapStyle(.standard)
             .mapControls {
@@ -107,6 +111,10 @@ public struct TransitMapView: View {
         }
         .sheet(isPresented: $showFilterSheet) {
             MapFilterSheet(filterState: $filterState)
+        }
+        .onAppear {
+            let status = CLLocationManager().authorizationStatus
+            locationAuthorized = status == .authorizedWhenInUse || status == .authorizedAlways
         }
     }
 }
