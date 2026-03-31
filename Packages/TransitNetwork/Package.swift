@@ -9,11 +9,12 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../CoreModels"),
+        .package(path: "../CoreExtensions"),
     ],
     targets: [
         .target(
             name: "TransitNetwork",
-            dependencies: ["CoreModels"],
+            dependencies: ["CoreModels", "CoreExtensions"],
         ),
         .testTarget(
             name: "TransitNetworkTests",

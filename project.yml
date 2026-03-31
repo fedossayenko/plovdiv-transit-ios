@@ -28,6 +28,8 @@ packages:
     path: Packages/StopFeature
   ScheduleFeature:
     path: Packages/ScheduleFeature
+  AssistantFeature:
+    path: Packages/AssistantFeature
 
 targets:
   PlovdivTransit:
@@ -43,6 +45,7 @@ targets:
       - package: MapFeature
       - package: StopFeature
       - package: ScheduleFeature
+      - package: AssistantFeature
       - target: PlovdivTransitWidgets
         embed: true
     settings:

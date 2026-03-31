@@ -1,4 +1,5 @@
 import ActivityKit
+import CoreExtensions
 import CoreModels
 import Foundation
 import TransitNetwork
@@ -58,7 +59,7 @@ public final class LiveActivityManager {
                 transitService: transitService,
             )
         } catch {
-            // Activity creation failed
+            transitLogger.error("Live Activity creation failed: \(error.localizedDescription)")
         }
     }
 
@@ -115,7 +116,7 @@ public final class LiveActivityManager {
                         break
                     }
                 } catch {
-                    // Network error, keep trying
+                    transitLogger.error("Live Activity update failed: \(error.localizedDescription)")
                 }
             }
         }

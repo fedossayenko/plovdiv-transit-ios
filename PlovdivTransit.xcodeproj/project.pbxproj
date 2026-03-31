@@ -14,12 +14,14 @@
 		597C0BAB4C77952E70F3F4D6 /* TransitLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732C13D0F11D328CDCF0F771 /* TransitLiveActivity.swift */; };
 		7C87C05CBBC1343C8AD594CA /* MapFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2588C63031B9A2C5CCA255A2 /* MapFeature */; };
 		7D5B84A6861C7B68EBF47F49 /* CoreModels in Frameworks */ = {isa = PBXBuildFile; productRef = 82CF5645B854FC13D5258486 /* CoreModels */; };
+		850F384F33CC75401F73F465 /* AssistantFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D2AC90264363706392D3FCB0 /* AssistantFeature */; };
 		90F8503759DFBBA83A883A4C /* CoreModels in Frameworks */ = {isa = PBXBuildFile; productRef = 1650EB90A744E2EF3CD3AD78 /* CoreModels */; };
 		97B526340B4ADDB203C28BFE /* PlovdivTransitWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0AF8654FE38B6375455C77 /* PlovdivTransitWidgets.swift */; };
 		9B459E322DB468AEBF653FD8 /* SharedUI in Frameworks */ = {isa = PBXBuildFile; productRef = 13CD512540B1A6BEAD15BDFF /* SharedUI */; };
 		9EE9A3EB909DCF93205B7EC4 /* PlovdivTransitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188883DC09EB498812CB78A8 /* PlovdivTransitApp.swift */; };
 		C2CA0DED8316CC33D499CD94 /* CoreExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 03D77017869DB4E78DF158E9 /* CoreExtensions */; };
 		E4094E9B7B4A46A16D62CF66 /* CoreModels in Frameworks */ = {isa = PBXBuildFile; productRef = 19942BFB2B8635783D213601 /* CoreModels */; };
+		EEE0C6FCB9D8430F1BF1906F /* FavoritesStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAAC061BF26C2B90CC859E6 /* FavoritesStoreTests.swift */; };
 		FBF688F5880D613C51B06E00 /* PlovdivTransitWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E76B3CBD96E4D3B80509A3B0 /* PlovdivTransitWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -60,6 +62,7 @@
 		24319EC439ED83DC125DB4F1 /* ScheduleFeature */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ScheduleFeature; path = Packages/ScheduleFeature; sourceTree = SOURCE_ROOT; };
 		3A49ABB7232E8DE6B1FA9E94 /* VehicleParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleParserTests.swift; sourceTree = "<group>"; };
 		4726A835F8147698386537C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5FC5D5E9E457C0DCE98FD07C /* AssistantFeature */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AssistantFeature; path = Packages/AssistantFeature; sourceTree = SOURCE_ROOT; };
 		6C0AF8654FE38B6375455C77 /* PlovdivTransitWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlovdivTransitWidgets.swift; sourceTree = "<group>"; };
 		732C13D0F11D328CDCF0F771 /* TransitLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitLiveActivity.swift; sourceTree = "<group>"; };
 		73DA0D9F59D2709AB3D1704C /* TransitNetwork */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TransitNetwork; path = Packages/TransitNetwork; sourceTree = SOURCE_ROOT; };
@@ -68,6 +71,7 @@
 		8C6B02AB2DEE5F7439254E44 /* MapFeature */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MapFeature; path = Packages/MapFeature; sourceTree = SOURCE_ROOT; };
 		B21BB1C19EAD1C0DCD29ADE9 /* CoreModels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CoreModels; path = Packages/CoreModels; sourceTree = SOURCE_ROOT; };
 		C8CC35A26C851D482102BDF6 /* SharedUI */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SharedUI; path = Packages/SharedUI; sourceTree = SOURCE_ROOT; };
+		CDAAC061BF26C2B90CC859E6 /* FavoritesStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesStoreTests.swift; sourceTree = "<group>"; };
 		D28879CDCBF60E6FD2BDE8BF /* StopFeature */ = {isa = PBXFileReference; lastKnownFileType = folder; name = StopFeature; path = Packages/StopFeature; sourceTree = SOURCE_ROOT; };
 		DBA61B2AD7167002F3E95DC2 /* PlovdivTransit.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PlovdivTransit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E76B3CBD96E4D3B80509A3B0 /* PlovdivTransitWidgets.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = PlovdivTransitWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +105,7 @@
 				7C87C05CBBC1343C8AD594CA /* MapFeature in Frameworks */,
 				2B01BF56983029E680C203FA /* StopFeature in Frameworks */,
 				0766F9868FFCCEC6D7C2BD52 /* ScheduleFeature in Frameworks */,
+				850F384F33CC75401F73F465 /* AssistantFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +115,7 @@
 		43D84C1B6AF6C6879B6EB16E /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				5FC5D5E9E457C0DCE98FD07C /* AssistantFeature */,
 				7887D9745DEA7DB89A7831D4 /* CoreExtensions */,
 				B21BB1C19EAD1C0DCD29ADE9 /* CoreModels */,
 				8C6B02AB2DEE5F7439254E44 /* MapFeature */,
@@ -172,6 +178,7 @@
 		FAA4AFD1913FC716D4DEC3BA /* CoreModelsTests */ = {
 			isa = PBXGroup;
 			children = (
+				CDAAC061BF26C2B90CC859E6 /* FavoritesStoreTests.swift */,
 				3A49ABB7232E8DE6B1FA9E94 /* VehicleParserTests.swift */,
 			);
 			name = CoreModelsTests;
@@ -242,6 +249,7 @@
 				2588C63031B9A2C5CCA255A2 /* MapFeature */,
 				52B732B76EBB2E23D7B0A06F /* StopFeature */,
 				B8EFF4E1E928B42B70DDBCDF /* ScheduleFeature */,
+				D2AC90264363706392D3FCB0 /* AssistantFeature */,
 			);
 			productName = PlovdivTransit;
 			productReference = DBA61B2AD7167002F3E95DC2 /* PlovdivTransit.app */;
@@ -274,6 +282,7 @@
 			mainGroup = F26DEB3D08575D759274D28B;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				7EB3D6FC9090A7F749B13F67 /* XCLocalSwiftPackageReference "Packages/AssistantFeature" */,
 				3CBC84D618655D39BE112139 /* XCLocalSwiftPackageReference "Packages/CoreExtensions" */,
 				78B4E20E9F3CD8DDECD599FF /* XCLocalSwiftPackageReference "Packages/CoreModels" */,
 				30EED900F8990D5FD77E4BE4 /* XCLocalSwiftPackageReference "Packages/MapFeature" */,
@@ -316,6 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEE0C6FCB9D8430F1BF1906F /* FavoritesStoreTests.swift in Sources */,
 				32C7C82B32566C3956F25C17 /* VehicleParserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -649,6 +659,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/CoreModels;
 		};
+		7EB3D6FC9090A7F749B13F67 /* XCLocalSwiftPackageReference "Packages/AssistantFeature" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/AssistantFeature;
+		};
 		CDB5A84CDF1CC8BD60DA6FAA /* XCLocalSwiftPackageReference "Packages/StopFeature" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/StopFeature;
@@ -691,6 +705,10 @@
 		B8EFF4E1E928B42B70DDBCDF /* ScheduleFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ScheduleFeature;
+		};
+		D2AC90264363706392D3FCB0 /* AssistantFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AssistantFeature;
 		};
 		F5B00D0F9D5FA16DBC0F672C /* TransitNetwork */ = {
 			isa = XCSwiftPackageProductDependency;

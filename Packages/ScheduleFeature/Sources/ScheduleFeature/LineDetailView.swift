@@ -121,6 +121,7 @@ public struct LineDetailView: View {
             tripResponse = try await transitService.fetchTripForLine(lineId: line.id)
             isLoading = false
         } catch {
+            transitLogger.error("Line trip load failed: \(error.localizedDescription)")
             isLoading = false
         }
     }

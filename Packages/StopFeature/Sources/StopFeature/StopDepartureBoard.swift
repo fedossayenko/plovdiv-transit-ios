@@ -25,12 +25,18 @@ public struct StopDepartureBoard: View {
             Group {
                 if isLoading {
                     ProgressView()
-                } else if let error {
-                    ContentUnavailableView(
-                        "Failed to load",
-                        systemImage: "exclamationmark.triangle",
-                        description: Text(error.localizedDescription),
-                    )
+                } else if error != nil {
+                    ContentUnavailableView {
+                        Label("Failed to load", systemImage: "exclamationmark.triangle")
+                    } description: {
+                        Text("Check your internet connection")
+                    } actions: {
+                        Button("Retry") {
+                            isLoading = true
+                            error = nil
+                            Task { await loadDepartures() }
+                        }
+                    }
                 } else if departures.isEmpty {
                     ContentUnavailableView(
                         "No departures",
@@ -159,5 +165,9 @@ struct DepartureRow: View {
             }
         }
         .padding(.vertical, 4)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(
+            "\(line?.name ?? "") to \(departure.destination.localized), \(departure.minutesUntil == 0 ? "arriving now" : "in \(departure.minutesUntil) minutes")",
+        )
     }
 }

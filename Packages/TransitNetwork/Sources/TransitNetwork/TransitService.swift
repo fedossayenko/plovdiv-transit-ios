@@ -1,6 +1,5 @@
 import CoreModels
 import Foundation
-import SwiftUI
 
 /// High-level transit service that combines REST API and WebSocket data.
 /// This is the main entry point for feature modules to access transit data.
@@ -14,6 +13,7 @@ public final class TransitService {
     private(set) public var isLoading = false
     private(set) public var error: Error?
     public var selectedTripShape: [Coordinate]?
+    private(set) public var vehicleUpdateCounter = 0
 
     private let apiClient: APIClient
     private let webSocket: VehicleWebSocket
@@ -129,9 +129,8 @@ public final class TransitService {
                     break
                 }
                 await MainActor.run {
-                    withAnimation(.linear(duration: 10)) {
-                        self.vehicles = vehicleBatch
-                    }
+                    self.vehicles = vehicleBatch
+                    self.vehicleUpdateCounter += 1
                 }
             }
 
