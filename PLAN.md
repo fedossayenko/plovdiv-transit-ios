@@ -86,7 +86,11 @@ PlovdivTransitApp (entry point)
   - Stops search → departure board
 - [x] Favorites system (FavoritesStore, star buttons, favorites sections)
 - [x] Offline caching (transit data cached to disk, loads first on startup)
-- [ ] Live Activities - Bus arrival countdown on Lock Screen / Dynamic Island
+- [x] Live Activities - Bus arrival countdown on Lock Screen / Dynamic Island
+  - Widget extension with ActivityKit
+  - Lock Screen + Dynamic Island (compact/expanded/minimal)
+  - LiveActivityManager with 30s update loop
+  - Swipe-to-track on departure rows
 - [ ] Push notification support for delays
 - [ ] TestFlight beta
 
