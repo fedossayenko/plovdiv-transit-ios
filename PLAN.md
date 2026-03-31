@@ -45,39 +45,49 @@ PlovdivTransitApp (entry point)
 
 ## Phase 1: MVP (8-10 weeks)
 
-### Sprint 1-2: Foundation (Weeks 1-4)
-- [ ] Xcode project setup with SPM modular structure
-- [ ] `CoreModels` package - Swift structs for Vehicle, Stop, Line, Trip
-- [ ] `TransitNetwork` package
+### Sprint 1-2: Foundation (Weeks 1-4) -- DONE
+- [x] Xcode project setup with SPM modular structure
+- [x] `CoreModels` package - Swift structs for Vehicle, Stop, Line, Trip
+- [x] `TransitNetwork` package
   - REST client for livetransport.eu API
   - WebSocket client for real-time vehicle positions
   - Array-indexed data parser (EVehicle2 format)
-- [ ] `SharedUI` package - Liquid Glass design system
+- [x] `SharedUI` package - Liquid Glass design system
   - GlassEffectContainer for navigation elements
   - .glassEffect(.regular) for toolbars
   - .glassEffect(.clear) for map overlays
   - Accessibility: Reduce Transparency, Increase Contrast, Reduce Motion
+- [x] Pre-commit hooks (SwiftLint 0.63.2 + SwiftFormat 0.60.1)
 
-### Sprint 3-4: Core Features (Weeks 5-8)
-- [ ] `MapFeature` - Real-time bus map
+### Sprint 3-4: Core Features (Weeks 5-8) -- DONE
+- [x] `MapFeature` - Real-time bus map
   - MapKit with vehicle annotations
-  - Vehicle interpolation (dead reckoning between 15-30s updates)
-  - Stop markers from 483-stop dataset
-  - Route polylines from trip shapes
-- [ ] `StopFeature` - Virtual departure board
+  - Vehicle interpolation (withAnimation on WebSocket updates)
+  - Stop markers (zoom-dependent, hidden when zoomed out)
+  - Route polylines from trip shapes (PolylineDecoder)
+  - Map filter sheet (filter by line/type)
+- [x] `StopFeature` - Virtual departure board
   - Uses `virtualBoard/{stopId}` endpoint
-  - Live countdown timers
+  - Live countdown timers + auto-refresh 30s
   - Delay indicators
-- [ ] `LocationCore` - User positioning
-  - CoreLocation + CoreMotion fusion
-  - Kalman filter for urban canyon correction
-  - Pedestrian dead reckoning
+  - Stop search with nearby stops (GPS-based)
+  - Tap departure → vehicle trip sheet
+- [x] `LocationCore` - User positioning (partial)
+  - LocationProvider: lightweight CLLocationManager wrapper
+  - Nearby stops sorted by distance
+  - Deferred: Kalman filter, CoreMotion sensor fusion
 
-### Sprint 5: Polish & Launch Prep (Weeks 9-10)
-- [ ] `ScheduleFeature` - Line schedules, brigade view
+### Sprint 5: Polish (Weeks 9-10) -- DONE
+- [x] `ScheduleFeature` - Line list + line detail with route map, live vehicles, stops
+- [x] Navigation wiring - all tap targets connected:
+  - Map → vehicle → trip stops → stop departure board
+  - Map → stop → departure board → vehicle trip
+  - Lines → line detail → vehicle trip
+  - Stops search → departure board
+- [x] Favorites system (FavoritesStore, star buttons, favorites sections)
+- [x] Offline caching (transit data cached to disk, loads first on startup)
 - [ ] Live Activities - Bus arrival countdown on Lock Screen / Dynamic Island
 - [ ] Push notification support for delays
-- [ ] Offline caching (stops, lines, schedules)
 - [ ] TestFlight beta
 
 ---
