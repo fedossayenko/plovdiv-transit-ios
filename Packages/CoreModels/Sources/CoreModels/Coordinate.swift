@@ -1,5 +1,7 @@
 import CoreLocation
 
+// MARK: - Coordinate
+
 /// A sendable wrapper around a geographic coordinate.
 public struct Coordinate: Hashable, Sendable {
     public let latitude: Double
@@ -15,11 +17,13 @@ public struct Coordinate: Hashable, Sendable {
     }
 }
 
+// MARK: Codable
+
 extension Coordinate: Codable {
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
-        self.latitude = try container.decode(Double.self)
-        self.longitude = try container.decode(Double.self)
+        latitude = try container.decode(Double.self)
+        longitude = try container.decode(Double.self)
     }
 
     public func encode(to encoder: Encoder) throws {

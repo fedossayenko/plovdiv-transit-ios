@@ -1,5 +1,7 @@
-import Foundation
 import CoreModels
+import Foundation
+
+// MARK: - APIClient
 
 /// REST API client for livetransport.eu.
 public actor APIClient {
@@ -9,11 +11,14 @@ public actor APIClient {
 
     public init(
         cityId: String = "plovdiv",
-        session: URLSession = .shared
+        session: URLSession = .shared,
     ) {
-        self.baseURL = URL(string: "https://api.livetransport.eu/\(cityId)")!
+        guard let url = URL(string: "https://api.livetransport.eu/\(cityId)") else {
+            fatalError("Invalid base URL for city: \(cityId)")
+        }
+        baseURL = url
         self.session = session
-        self.decoder = JSONDecoder()
+        decoder = JSONDecoder()
     }
 
     // MARK: - Endpoints
@@ -70,6 +75,8 @@ public actor APIClient {
         return try decoder.decode(T.self, from: data)
     }
 }
+
+// MARK: - APIError
 
 public enum APIError: Error, Sendable {
     case invalidResponse

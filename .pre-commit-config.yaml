@@ -1,0 +1,38 @@
+repos:
+  # Generic checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude_types: [swift]
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: check-added-large-files
+        args: ["--maxkb=500"]
+
+  # Use locally installed tools (brew) instead of building from source
+  - repo: local
+    hooks:
+      - id: swiftformat
+        name: SwiftFormat
+        entry: swiftformat
+        language: system
+        types: [swift]
+
+      - id: swiftlint
+        name: SwiftLint
+        entry: swiftlint --fix --force-exclude
+        language: system
+        types: [swift]
+
+      - id: no-print-statements
+        name: No print() in production code
+        entry: bash
+        args:
+          - -c
+          - |
+            git diff --cached --name-only --diff-filter=ACM -- '*.swift' | grep -v Tests/ | xargs grep -n '^\s*print(' 2>/dev/null && echo 'ERROR: Found print() - use os.Logger' && exit 1 || exit 0
+        language: system
+        pass_filenames: false

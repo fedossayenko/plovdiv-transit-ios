@@ -16,13 +16,17 @@ public struct DelayIndicator: View {
 
     private var text: String {
         let minutes = Int(delaySeconds / 60)
-        if abs(minutes) < 1 { return "On time" }
+        if abs(minutes) < 1 {
+            return "On time"
+        }
         return minutes > 0 ? "+\(minutes) min" : "\(minutes) min"
     }
 
     private var color: Color {
         let minutes = Int(delaySeconds / 60)
-        if abs(minutes) < 1 { return TransitColors.onTime }
+        if abs(minutes) < 1 {
+            return TransitColors.onTime
+        }
         return minutes > 0 ? TransitColors.delayPositive : TransitColors.delayNegative
     }
 }

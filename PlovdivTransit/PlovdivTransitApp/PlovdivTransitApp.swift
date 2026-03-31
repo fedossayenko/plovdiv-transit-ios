@@ -1,8 +1,10 @@
+import MapFeature
+import ScheduleFeature
+import StopFeature
 import SwiftUI
 import TransitNetwork
-import MapFeature
-import StopFeature
-import ScheduleFeature
+
+// MARK: - PlovdivTransitApp
 
 @main
 struct PlovdivTransitApp: App {
@@ -18,6 +20,8 @@ struct PlovdivTransitApp: App {
         }
     }
 }
+
+// MARK: - ContentView
 
 struct ContentView: View {
     @Environment(TransitService.self) private var transitService

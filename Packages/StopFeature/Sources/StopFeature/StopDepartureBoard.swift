@@ -1,8 +1,10 @@
-import SwiftUI
-import CoreModels
-import TransitNetwork
-import SharedUI
 import CoreExtensions
+import CoreModels
+import SharedUI
+import SwiftUI
+import TransitNetwork
+
+// MARK: - StopDepartureBoard
 
 /// Virtual departure board for a transit stop, showing upcoming departures.
 public struct StopDepartureBoard: View {
@@ -25,19 +27,19 @@ public struct StopDepartureBoard: View {
                     ContentUnavailableView(
                         "Failed to load",
                         systemImage: "exclamationmark.triangle",
-                        description: Text(error.localizedDescription)
+                        description: Text(error.localizedDescription),
                     )
                 } else if departures.isEmpty {
                     ContentUnavailableView(
                         "No departures",
                         systemImage: "bus",
-                        description: Text("No upcoming departures from this stop")
+                        description: Text("No upcoming departures from this stop"),
                     )
                 } else {
                     List(departures) { departure in
                         DepartureRow(
                             departure: departure,
-                            line: transitService.line(for: departure.lineId)
+                            line: transitService.line(for: departure.lineId),
                         )
                     }
                     .refreshable {
@@ -71,6 +73,8 @@ public struct StopDepartureBoard: View {
         }
     }
 }
+
+// MARK: - DepartureRow
 
 struct DepartureRow: View {
     let departure: Departure

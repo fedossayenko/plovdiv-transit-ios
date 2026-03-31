@@ -1,5 +1,5 @@
-import Foundation
 import CoreModels
+import Foundation
 
 /// High-level transit service that combines REST API and WebSocket data.
 /// This is the main entry point for feature modules to access transit data.
@@ -22,8 +22,8 @@ public final class TransitService {
     private var stopsById: [String: Stop] = [:]
 
     public init(cityId: String = "plovdiv") {
-        self.apiClient = APIClient(cityId: cityId)
-        self.webSocket = VehicleWebSocket(cityId: cityId)
+        apiClient = APIClient(cityId: cityId)
+        webSocket = VehicleWebSocket(cityId: cityId)
     }
 
     // MARK: - Lifecycle
@@ -35,10 +35,10 @@ public final class TransitService {
 
         do {
             let data = try await apiClient.fetchTransitData()
-            self.lines = data.lines
-            self.stops = data.stops
-            self.linesById = Dictionary(uniqueKeysWithValues: data.lines.map { ($0.id, $0) })
-            self.stopsById = Dictionary(uniqueKeysWithValues: data.stops.map { ($0.id, $0) })
+            lines = data.lines
+            stops = data.stops
+            linesById = Dictionary(uniqueKeysWithValues: data.lines.map { ($0.id, $0) })
+            stopsById = Dictionary(uniqueKeysWithValues: data.stops.map { ($0.id, $0) })
             isLoading = false
 
             connectVehicleStream()
@@ -91,12 +91,16 @@ public final class TransitService {
     private func connectVehicleStream() {
         vehicleStreamTask?.cancel()
         vehicleStreamTask = Task { [weak self] in
-            guard let self else { return }
+            guard let self else {
+                return
+            }
             let stream = await webSocket.connect()
             await MainActor.run { self.isConnected = true }
 
             for await vehicleBatch in stream {
-                guard !Task.isCancelled else { break }
+                guard !Task.isCancelled else {
+                    break
+                }
                 await MainActor.run {
                     self.vehicles = vehicleBatch
                 }

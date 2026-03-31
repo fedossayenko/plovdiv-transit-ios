@@ -26,7 +26,7 @@ public struct Vehicle: Identifiable, Hashable, Sendable {
         coords: Coordinate,
         bearing: Int,
         speed: Int,
-        lastUpdated: Date
+        lastUpdated: Date,
     ) {
         self.id = id
         self.type = type
@@ -41,15 +41,21 @@ public struct Vehicle: Identifiable, Hashable, Sendable {
     }
 
     /// Whether the vehicle is delayed (positive delay).
-    public var isDelayed: Bool { delay > 0 }
+    public var isDelayed: Bool {
+        delay > 0
+    }
 
     /// Whether the vehicle is ahead of schedule (negative delay).
-    public var isEarly: Bool { delay < 0 }
+    public var isEarly: Bool {
+        delay < 0
+    }
 
     /// Formatted delay string (e.g., "+3 min", "-1 min", "On time").
     public var delayText: String {
         let minutes = Int(delay / 60)
-        if minutes == 0 { return "On time" }
+        if minutes == 0 {
+            return "On time"
+        }
         return minutes > 0 ? "+\(minutes) min" : "\(minutes) min"
     }
 }

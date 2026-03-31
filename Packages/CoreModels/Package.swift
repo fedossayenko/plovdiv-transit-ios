@@ -5,10 +5,10 @@ let package = Package(
     name: "CoreModels",
     platforms: [.iOS(.v26), .macOS(.v15)],
     products: [
-        .library(name: "CoreModels", targets: ["CoreModels"])
+        .library(name: "CoreModels", targets: ["CoreModels"]),
     ],
     targets: [
         .target(name: "CoreModels"),
-        .testTarget(name: "CoreModelsTests", dependencies: ["CoreModels"])
-    ]
+        .testTarget(name: "CoreModelsTests", dependencies: ["CoreModels"]),
+    ],
 )

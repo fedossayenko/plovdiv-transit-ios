@@ -1,5 +1,7 @@
 import SwiftUI
 
+// MARK: - GlassToolbar
+
 /// A floating toolbar with Liquid Glass effect.
 /// Glass is only used on the navigation layer (toolbars, buttons) - never on content.
 public struct GlassToolbar<Content: View>: View {
@@ -29,6 +31,8 @@ public struct GlassToolbar<Content: View>: View {
         }
     }
 }
+
+// MARK: - GlassButton
 
 /// A floating action button with Liquid Glass effect.
 public struct GlassButton: View {

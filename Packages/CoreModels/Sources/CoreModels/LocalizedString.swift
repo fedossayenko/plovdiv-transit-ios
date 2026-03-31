@@ -13,9 +13,9 @@ public struct LocalizedString: Codable, Hashable, Sendable {
     /// Returns the localized value based on the current device locale.
     public var localized: String {
         if #available(iOS 16, macOS 13, *) {
-            return Locale.current.language.languageCode?.identifier == "bg" ? bg : en
+            Locale.current.language.languageCode?.identifier == "bg" ? bg : en
         } else {
-            return Locale.current.languageCode == "bg" ? bg : en
+            Locale.current.languageCode == "bg" ? bg : en
         }
     }
 }

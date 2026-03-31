@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - Departure
+
 /// A departure from a virtual board at a stop.
 public struct Departure: Identifiable, Codable, Hashable, Sendable {
     public let tripId: String
@@ -9,7 +11,9 @@ public struct Departure: Identifiable, Codable, Hashable, Sendable {
     public let time: DepartureTime
     public let destination: LocalizedString
 
-    public var id: String { tripId }
+    public var id: String {
+        tripId
+    }
 
     public init(
         tripId: String,
@@ -17,7 +21,7 @@ public struct Departure: Identifiable, Codable, Hashable, Sendable {
         vehicleId: String?,
         activeTrip: Bool?,
         time: DepartureTime,
-        destination: LocalizedString
+        destination: LocalizedString,
     ) {
         self.tripId = tripId
         self.lineId = lineId
@@ -34,6 +38,8 @@ public struct Departure: Identifiable, Codable, Hashable, Sendable {
     }
 }
 
+// MARK: - DepartureTime
+
 public struct DepartureTime: Codable, Hashable, Sendable {
     public let scheduled: Date
     public let actual: Date
@@ -47,8 +53,8 @@ public struct DepartureTime: Codable, Hashable, Sendable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let scheduledMs = try container.decode(Double.self, forKey: .scheduled)
         let actualMs = try container.decode(Double.self, forKey: .actual)
-        self.scheduled = Date(timeIntervalSince1970: scheduledMs / 1000.0)
-        self.actual = Date(timeIntervalSince1970: actualMs / 1000.0)
+        scheduled = Date(timeIntervalSince1970: scheduledMs / 1000.0)
+        actual = Date(timeIntervalSince1970: actualMs / 1000.0)
     }
 
     /// Delay in seconds (positive = late, negative = early).
@@ -60,6 +66,8 @@ public struct DepartureTime: Codable, Hashable, Sendable {
         case scheduled, actual
     }
 }
+
+// MARK: - VirtualBoardResponse
 
 /// Response from the virtual board endpoint.
 public struct VirtualBoardResponse: Codable, Sendable {

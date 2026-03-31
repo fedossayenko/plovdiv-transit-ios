@@ -1,6 +1,6 @@
-import SwiftUI
 import CoreModels
 import SharedUI
+import SwiftUI
 
 /// Map annotation for a single vehicle, showing line number and bearing.
 struct VehicleAnnotationView: View {
@@ -22,7 +22,7 @@ struct VehicleAnnotationView: View {
                 .frame(minWidth: 24, minHeight: 24)
                 .background(
                     Color(hex: line?.color ?? "#0073ac"),
-                    in: .rect(cornerRadius: 6)
+                    in: .rect(cornerRadius: 6),
                 )
         }
         .opacity(vehicle.speed > 0 ? 1.0 : 0.7)

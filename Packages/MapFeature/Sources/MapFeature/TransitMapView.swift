@@ -1,8 +1,8 @@
-import SwiftUI
-import MapKit
 import CoreModels
-import TransitNetwork
+import MapKit
 import SharedUI
+import SwiftUI
+import TransitNetwork
 
 /// The main map view showing real-time vehicle positions and stops.
 public struct TransitMapView: View {
@@ -10,8 +10,8 @@ public struct TransitMapView: View {
     @State private var cameraPosition: MapCameraPosition = .region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 42.14213, longitude: 24.75230),
-            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        )
+            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05),
+        ),
     )
     @State private var selectedVehicle: Vehicle?
 
@@ -25,11 +25,11 @@ public struct TransitMapView: View {
                     Annotation(
                         vehicle.destination.localized,
                         coordinate: vehicle.coords.clLocationCoordinate,
-                        anchor: .center
+                        anchor: .center,
                     ) {
                         VehicleAnnotationView(
                             vehicle: vehicle,
-                            line: transitService.line(for: vehicle.lineId)
+                            line: transitService.line(for: vehicle.lineId),
                         )
                         .onTapGesture {
                             selectedVehicle = vehicle
@@ -42,7 +42,7 @@ public struct TransitMapView: View {
                     Annotation(
                         stop.name.localized,
                         coordinate: stop.geo.coords.clLocationCoordinate,
-                        anchor: .center
+                        anchor: .center,
                     ) {
                         Circle()
                             .fill(.white)

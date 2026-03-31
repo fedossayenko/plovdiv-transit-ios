@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - Stop
+
 /// A transit stop in the Plovdiv network.
 public struct Stop: Identifiable, Hashable, Sendable {
     public let id: String
@@ -15,6 +17,8 @@ public struct Stop: Identifiable, Hashable, Sendable {
     }
 }
 
+// MARK: - StopGeo
+
 public struct StopGeo: Codable, Hashable, Sendable {
     public let coords: Coordinate
     public let bearing: Int
@@ -24,5 +28,7 @@ public struct StopGeo: Codable, Hashable, Sendable {
         self.bearing = bearing
     }
 }
+
+// MARK: - Stop + Codable
 
 extension Stop: Codable {}

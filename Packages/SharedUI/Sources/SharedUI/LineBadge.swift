@@ -1,5 +1,5 @@
-import SwiftUI
 import CoreModels
+import SwiftUI
 
 /// Displays a transit line number badge with the line's color.
 public struct LineBadge: View {

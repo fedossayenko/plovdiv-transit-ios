@@ -1,5 +1,5 @@
-import Foundation
 import CoreModels
+import Foundation
 
 /// Manages the WebSocket connection for real-time vehicle positions.
 ///
@@ -12,7 +12,10 @@ public actor VehicleWebSocket {
     private let session: URLSession
 
     public init(cityId: String = "plovdiv", session: URLSession = .shared) {
-        self.url = URL(string: "wss://api.livetransport.eu/\(cityId)")!
+        guard let wsURL = URL(string: "wss://api.livetransport.eu/\(cityId)") else {
+            fatalError("Invalid WebSocket URL for city: \(cityId)")
+        }
+        url = wsURL
         self.session = session
     }
 
@@ -50,24 +53,30 @@ public actor VehicleWebSocket {
     // MARK: - Private
 
     private func receiveLoop() async {
-        guard let task else { return }
+        guard let task else {
+            return
+        }
 
         while task.state == .running {
             do {
                 let message = try await task.receive()
                 switch message {
-                case .data(let data):
+                case let .data(data):
                     let vehicles = try VehicleParser.parseWebSocketMessage(data)
                     continuation?.yield(vehicles)
-                case .string(let text):
-                    guard let data = text.data(using: .utf8) else { continue }
+                case let .string(text):
+                    guard let data = text.data(using: .utf8) else {
+                        continue
+                    }
                     let vehicles = try VehicleParser.parseWebSocketMessage(data)
                     continuation?.yield(vehicles)
                 @unknown default:
                     break
                 }
             } catch {
-                if task.state != .running { break }
+                if task.state != .running {
+                    break
+                }
                 try? await Task.sleep(for: .seconds(2))
             }
         }

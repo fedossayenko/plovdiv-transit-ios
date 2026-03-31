@@ -1,7 +1,7 @@
-import SwiftUI
 import CoreModels
-import TransitNetwork
 import SharedUI
+import SwiftUI
+import TransitNetwork
 
 /// Shows all transit lines, grouped by type.
 public struct LinesListView: View {

@@ -5,15 +5,15 @@ let package = Package(
     name: "SharedUI",
     platforms: [.iOS(.v26)],
     products: [
-        .library(name: "SharedUI", targets: ["SharedUI"])
+        .library(name: "SharedUI", targets: ["SharedUI"]),
     ],
     dependencies: [
-        .package(path: "../CoreModels")
+        .package(path: "../CoreModels"),
     ],
     targets: [
         .target(
             name: "SharedUI",
-            dependencies: ["CoreModels"]
-        )
-    ]
+            dependencies: ["CoreModels"],
+        ),
+    ],
 )

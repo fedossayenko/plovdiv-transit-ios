@@ -1,5 +1,7 @@
 import SwiftUI
 
+// MARK: - TransitColors
+
 /// Design tokens for the Plovdiv Transit app.
 public enum TransitColors {
     public static let busDefault = Color(hex: "#0073ac")
@@ -8,6 +10,8 @@ public enum TransitColors {
     public static let onTime = Color.primary
 }
 
+// MARK: - TransitTypography
+
 public enum TransitTypography {
     public static let lineNumber = Font.system(.title3, design: .rounded, weight: .bold)
     public static let stopName = Font.system(.body, weight: .medium)
@@ -15,8 +19,8 @@ public enum TransitTypography {
     public static let caption = Font.system(.caption)
 }
 
-extension Color {
-    public init(hex: String) {
+public extension Color {
+    init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet(charactersIn: "#"))
         var int: UInt64 = 0
         Scanner(string: hex).scanHexInt64(&int)

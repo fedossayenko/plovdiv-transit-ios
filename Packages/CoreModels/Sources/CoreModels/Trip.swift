@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - Trip
+
 /// A scheduled trip along a transit line.
 public struct Trip: Identifiable, Codable, Hashable, Sendable {
     public let id: String
@@ -17,6 +19,8 @@ public struct Trip: Identifiable, Codable, Hashable, Sendable {
     }
 }
 
+// MARK: - TripStop
+
 /// A stop within a trip, with its scheduled time.
 public struct TripStop: Codable, Hashable, Sendable {
     public let id: String
@@ -29,15 +33,17 @@ public struct TripStop: Codable, Hashable, Sendable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(String.self, forKey: .id)
+        id = try container.decode(String.self, forKey: .id)
         let ms = try container.decode(Double.self, forKey: .scheduled)
-        self.scheduled = Date(timeIntervalSince1970: ms / 1000.0)
+        scheduled = Date(timeIntervalSince1970: ms / 1000.0)
     }
 
     private enum CodingKeys: String, CodingKey {
         case id, scheduled
     }
 }
+
+// MARK: - VehicleTripResponse
 
 /// Response from the vehicle trip endpoint.
 public struct VehicleTripResponse: Codable, Sendable {

@@ -1,0 +1,50 @@
+# SwiftFormat Configuration - Plovdiv Transit iOS
+# SwiftFormat 0.60.1 / Swift 6.2 / iOS 26
+
+--swiftversion 6.2
+--minversion 0.57
+
+# File options
+--exclude .build,DerivedData,*.xcodeproj
+
+# Formatting rules
+--enable isEmpty
+--enable markTypes
+--enable sortSwitchCases
+--enable wrapConditionalBodies
+--enable docComments
+
+# Indentation
+--indent 4
+--tabwidth 4
+--indentcase false
+--ifdef indent
+--xcodeindentation disabled
+
+# Wrapping
+--maxwidth 140
+--wraparguments before-first
+--wrapparameters before-first
+--wrapcollections before-first
+--wrapconditions after-first
+--closingparen balanced
+
+# Spacing
+--operatorfunc spaced
+--nospaceoperators
+--ranges spaced
+
+# Braces
+--allman false
+--elseposition same-line
+--guardelse next-line
+
+# Organization
+--importgrouping alpha
+--self remove
+--selfrequired
+--redundanttype inferred
+
+# Strip
+--stripunusedargs closure-only
+--header strip

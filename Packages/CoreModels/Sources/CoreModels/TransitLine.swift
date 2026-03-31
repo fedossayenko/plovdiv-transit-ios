@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - TransitLine
+
 /// A transit line (bus route) in the Plovdiv network.
 public struct TransitLine: Identifiable, Hashable, Sendable {
     public let id: String
@@ -17,12 +19,16 @@ public struct TransitLine: Identifiable, Hashable, Sendable {
     }
 }
 
+// MARK: Codable
+
 extension TransitLine: Codable {}
+
+// MARK: - VehicleType
 
 public enum VehicleType: String, Codable, Hashable, Sendable {
     case bus
     case trolley
     case tram
     case metro
-    case nightBus = "nightBus"
+    case nightBus
 }

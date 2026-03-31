@@ -5,18 +5,18 @@ let package = Package(
     name: "StopFeature",
     platforms: [.iOS(.v26)],
     products: [
-        .library(name: "StopFeature", targets: ["StopFeature"])
+        .library(name: "StopFeature", targets: ["StopFeature"]),
     ],
     dependencies: [
         .package(path: "../CoreModels"),
         .package(path: "../TransitNetwork"),
         .package(path: "../SharedUI"),
-        .package(path: "../CoreExtensions")
+        .package(path: "../CoreExtensions"),
     ],
     targets: [
         .target(
             name: "StopFeature",
-            dependencies: ["CoreModels", "TransitNetwork", "SharedUI", "CoreExtensions"]
-        )
-    ]
+            dependencies: ["CoreModels", "TransitNetwork", "SharedUI", "CoreExtensions"],
+        ),
+    ],
 )

@@ -1,8 +1,8 @@
-import SwiftUI
-import CoreModels
-import TransitNetwork
-import SharedUI
 import CoreExtensions
+import CoreModels
+import SharedUI
+import SwiftUI
+import TransitNetwork
 
 /// Bottom sheet showing details for a selected vehicle.
 struct VehicleDetailSheet: View {

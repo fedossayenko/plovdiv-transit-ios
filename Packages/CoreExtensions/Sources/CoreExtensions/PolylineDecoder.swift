@@ -5,7 +5,6 @@ import CoreLocation
 ///
 /// Reference: https://developers.google.com/maps/documentation/utilities/polylinealgorithm
 public enum PolylineDecoder {
-
     public static func decode(_ encoded: String) -> [CLLocationCoordinate2D] {
         var coordinates: [CLLocationCoordinate2D] = []
         var index = encoded.startIndex
@@ -17,7 +16,7 @@ public enum PolylineDecoder {
             lng += decodeValue(from: encoded, index: &index)
             coordinates.append(CLLocationCoordinate2D(
                 latitude: Double(lat) / 1e5,
-                longitude: Double(lng) / 1e5
+                longitude: Double(lng) / 1e5,
             ))
         }
 
@@ -30,7 +29,8 @@ public enum PolylineDecoder {
         var byte: Int32
 
         repeat {
-            byte = Int32(string[index].asciiValue! - 63)
+            // swiftlint:disable:next force_unwrapping
+            byte = Int32(string[index].asciiValue! - 63) // ASCII guaranteed for encoded polyline chars
             index = string.index(after: index)
             result |= (byte & 0x1F) << shift
             shift += 5
