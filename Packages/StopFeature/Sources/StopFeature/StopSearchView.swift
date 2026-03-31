@@ -80,15 +80,15 @@ public struct StopSearchView: View {
             }
             .searchable(text: $searchText, prompt: "Search stops by name or code")
             .navigationTitle("Stops")
-            .navigationDestination(for: Stop.self) { stop in
-                StopDepartureBoard(stop: stop)
-            }
             .onAppear {
                 if locationProvider.authorizationStatus == .authorizedWhenInUse
                     || locationProvider.authorizationStatus == .authorizedAlways
                 {
                     locationProvider.startUpdating()
                 }
+            }
+            .navigationDestination(for: Stop.self) { stop in
+                StopDepartureBoard(stop: stop)
             }
         }
     }
