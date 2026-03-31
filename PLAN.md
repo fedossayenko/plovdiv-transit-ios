@@ -94,14 +94,23 @@ PlovdivTransitApp (entry point)
 - [ ] Push notification support for delays
 - [ ] TestFlight beta
 
+### Sprint 6: Production Hardening (Weeks 11-12) -- DONE
+- [x] Accessibility: VoiceOver labels, SF Symbols for color-blind, Dynamic Type, Reduce Motion
+- [x] Error recovery: retry buttons, WebSocket exponential backoff (2s-30s), disconnection banner
+- [x] Logging: os.Logger in CoreExtensions, all catch blocks logged
+- [x] Unit tests: 13 tests across 3 suites (parser, favorites, polyline)
+- [x] Map clustering: grid-based vehicle clustering at low zoom
+- [x] `AssistantFeature` - On-device Foundation Models assistant
+  - LanguageModelSession with transit system prompt + live context
+  - Chat UI with message bubbles and streaming indicator
+  - Feature-gated: only on devices with Apple Intelligence
+- [ ] Route change alerts (API returns 404/empty for Plovdiv — no data available)
+- [ ] Brigade schedules (API returns empty for Plovdiv — no data available)
+
 ---
 
-## Phase 2: Intelligence & Payments (Weeks 11-18)
+## Phase 2: Payments & Advanced (Weeks 13+)
 
-- [ ] `AssistantFeature` - On-device Foundation Models assistant
-  - SystemLanguageModel for natural language queries
-  - Tool calling: findRoute, getNearbyStops, getNextBus
-  - Bulgarian + English language support
 - [ ] `TicketingFeature` - Apple Wallet integration
   - PassKit transit pass provisioning
   - Express Transit Mode (tap-to-pay without unlock)
