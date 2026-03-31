@@ -47,8 +47,7 @@ import TransitNetwork
 
         /// Check if Foundation Models are available on this device.
         public static var isAvailable: Bool {
-            // SystemLanguageModel.default exists, availability depends on device
-            true
+            SystemLanguageModel.default.isAvailable
         }
 
         // MARK: - Private

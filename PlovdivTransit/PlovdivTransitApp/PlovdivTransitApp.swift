@@ -48,7 +48,7 @@ struct ContentView: View {
             }
         }
         .overlay(alignment: .top) {
-            if !transitService.isConnected, !transitService.isLoading {
+            if !transitService.isConnected, !transitService.isLoading, !transitService.lines.isEmpty {
                 Label("Reconnecting...", systemImage: "wifi.slash")
                     .font(.caption)
                     .padding(.horizontal, 12)
