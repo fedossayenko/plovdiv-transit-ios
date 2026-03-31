@@ -38,7 +38,7 @@ public struct TransitMapView: View {
                 if let shape = transitService.selectedTripShape {
                     let coords = shape.map(\.clLocationCoordinate)
                     MapPolyline(coordinates: coords)
-                        .stroke(.accent, lineWidth: 4)
+                        .stroke(.blue, lineWidth: 4)
                 }
 
                 // Vehicle annotations
