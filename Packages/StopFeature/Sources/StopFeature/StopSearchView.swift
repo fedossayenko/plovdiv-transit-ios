@@ -49,7 +49,9 @@ public struct StopSearchView: View {
                     if !nearbyStops.isEmpty {
                         Section("Nearby") {
                             ForEach(nearbyStops) { stop in
-                                NavigationLink(value: stop) {
+                                NavigationLink {
+                                    StopDepartureBoard(stop: stop)
+                                } label: {
                                     StopRow(stop: stop, userLocation: locationProvider.userLocation)
                                 }
                             }
@@ -71,7 +73,9 @@ public struct StopSearchView: View {
                     // Search results
                     Section("Results (\(filteredStops.count))") {
                         ForEach(filteredStops) { stop in
-                            NavigationLink(value: stop) {
+                            NavigationLink {
+                                StopDepartureBoard(stop: stop)
+                            } label: {
                                 StopRow(stop: stop, userLocation: locationProvider.userLocation)
                             }
                         }
@@ -86,9 +90,6 @@ public struct StopSearchView: View {
                 {
                     locationProvider.startUpdating()
                 }
-            }
-            .navigationDestination(for: Stop.self) { stop in
-                StopDepartureBoard(stop: stop)
             }
         }
     }
